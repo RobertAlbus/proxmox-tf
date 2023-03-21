@@ -1,17 +1,20 @@
 provider "proxmox" {
-  pm_api_url  = var.pm_api_url
-  pm_user     = var.pm_user
-  pm_password = var.pm_password
+  virtual_environment {
+    endpoint = var.pm_api_url
+    username = var.pm_user
+    password = var.pm_password
+    insecure = true
+  }
 }
 
 terraform {
   required_providers {
     proxmox = {
-      source = "Telmate/proxmox"
-      version = "2.9.13"
+      source = "bpg/proxmox"
+      version = "0.14.1"
     }
   }
-  
+
   backend "local" {
     path = "terraform.tfstate"
   }
